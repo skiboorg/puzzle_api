@@ -16,7 +16,7 @@ class StartGame(APIView):
         data = request.data
         print(data)
         user = request.user
-        if user:
+        if user.is_authenticated:
             game = Game(
                 player=user,
                 level_id=data.get('level_id'),
