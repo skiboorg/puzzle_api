@@ -1,0 +1,9 @@
+djangorestframework
+django-cors-headers
+pillow
+djoser
+pytils
+django-ckeditor
+segno
+faker
+django-random-queryset
