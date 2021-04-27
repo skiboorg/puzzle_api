@@ -29,6 +29,7 @@ class Ad(models.Model):
 
 
 class Level(models.Model):
+    image = models.ImageField('Задний фон', blank=True, upload_to='levels/', null=True)
     name = models.CharField('Название',max_length=50,null=True,blank=True)
     pieces = models.IntegerField('Частей пазла',default=0)
     timer = models.IntegerField('Таймер в минутах',default=0)
