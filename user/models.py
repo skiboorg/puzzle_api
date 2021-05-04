@@ -38,12 +38,15 @@ class User(AbstractUser):
     nickname = models.CharField('Ник', max_length=50, blank=False, null=True)
     balance = models.IntegerField('Баланс', default=1000)
     add_balance = models.IntegerField('Баланс снимаемый', default=0)
+
     rating = models.IntegerField('Рейтинг', default=0)
     age = models.IntegerField('Возраст', blank=True, null=True)
     sex = models.CharField('Пол', max_length=50, blank=True, null=True)
     study = models.TextField('Образование',  blank=True, null=True)
     work = models.TextField('Работа',  blank=True, null=True)
     profession = models.TextField('Профессия', blank=True, null=True)
+
+    games_count = models.IntegerField(default=3)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

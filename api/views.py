@@ -4,7 +4,10 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from .serializers import *
 from .models import *
-
+from datetime import datetime
+import datetime as dt
+from datetime import datetime
+from django.utils import timezone
 
 class GetGameLevels(generics.ListAPIView):
     serializer_class = GameLevelSerializer
@@ -17,18 +20,23 @@ class StartGame(APIView):
         print(data)
         user = request.user
         if user.is_authenticated:
+
             game = Game(
                 player=user,
                 level_id=data.get('level_id'),
                 game_type=data.get('type')
             )
+            user.games_count -= 1
+            user.save()
+
         else:
             game = Game(
                 level_id=data.get('level_id'),
                 game_type=data.get('type')
             )
         game.save()
-        print(game)
+
+
         return Response ({'id':game.id,'img':game.image.url}, status=200)
 
 

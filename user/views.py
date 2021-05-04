@@ -12,8 +12,11 @@ from .services import create_random_string
 from .serializers import *
 from .models import *
 from rest_framework import generics
-
-
+from datetime import datetime
+import datetime as dt
+from datetime import datetime
+from django.utils import timezone
+from api.models import Game
 
 
 class UserUpdate(APIView):
@@ -46,6 +49,19 @@ class GetUser(generics.RetrieveAPIView):
     #     serializer = UserSerializer(user, many=False)
     #     return Response(serializer.data)
 
+
+class GetUserGameCount(APIView):
+    def get(self, request):
+        user = request.user
+        today = timezone.now()
+
+        game = Game.objects.filter(player=user).last()
+        last_game = game.date
+        print(today - last_game)
+        if today - last_game > dt.timedelta(minutes=1):
+            user.games_count = 3
+            user.save()
+        return Response({'games':user.games_count}, status=200)
 
 class UserRecoverPassword(APIView):
     def post(self,request):
