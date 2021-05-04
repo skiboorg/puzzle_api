@@ -63,7 +63,15 @@ class EndGame(APIView):
 
 class AddFb(APIView):
     def post(self,request):
-        pass
+        print(request.data)
+        data = request.data
+        new_fb = FeedBack.objects.create(user=request.user,text=data.get('message'))
+        if request.FILES:
+            files = request.FILES.getlist('image')
+            for file in files:
+                new_fb.image = file
+                new_fb.save()
+        return Response (status=200)
 
 class AllFb(generics.ListAPIView):
     serializer_class = FeedBackSerializer
