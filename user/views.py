@@ -26,9 +26,9 @@ class UserUpdate(APIView):
         user = request.user
         userData = json.loads(request.data['userData'])
         serializer = UserSerializer(user, data=userData)
-        if userData.get('pass') != '':
-            user.set_password(userData.get('pass'))
-            user.save()
+        # if userData.get('pass') != '':
+        #     user.set_password(userData.get('pass'))
+        #     user.save()
         if serializer.is_valid():
             serializer.save()
             for f in request.FILES.getlist('avatar'):
