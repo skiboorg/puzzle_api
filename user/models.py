@@ -46,7 +46,7 @@ class User(AbstractUser):
     work = models.TextField('Работа',  blank=True, null=True)
     profession = models.TextField('Профессия', blank=True, null=True)
 
-    games_count = models.IntegerField(default=3)
+    games_count = models.IntegerField(default=5)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
