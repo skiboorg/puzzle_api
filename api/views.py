@@ -77,6 +77,10 @@ class AllFb(generics.ListAPIView):
     serializer_class = FeedBackSerializer
     queryset = FeedBack.objects.filter(is_active=True)
 
+class AddMoneyRatings(generics.ListAPIView):
+    serializer_class = RatingUserSerializer
+    queryset = User.objects.all().order_by('-total_add')
+
 class Ratings(generics.ListAPIView):
     serializer_class = RatingUserSerializer
     queryset = User.objects.all().order_by('-rating')

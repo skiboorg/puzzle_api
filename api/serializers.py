@@ -11,7 +11,8 @@ class RatingUserSerializer(serializers.ModelSerializer):
             'nickname',
             'rating',
             'games',
-            'avatar'
+            'avatar',
+            'total_add'
         ]
 
     def get_games(self,obj):

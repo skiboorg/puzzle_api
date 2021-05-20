@@ -50,6 +50,23 @@ class GetUser(generics.RetrieveAPIView):
     #     return Response(serializer.data)
 
 
+class AddMoney(APIView):
+    def post(self, request):
+        print(request.data)
+        request.user.add_balance += int(request.data.get('amount'))
+        request.user.total_add += int(request.data.get('amount'))
+        request.user.save()
+        return Response(status=200)
+
+class RemoveMoney(APIView):
+    def post(self, request):
+        print(request.data)
+        request.user.add_balance -= int(request.data.get('amount'))
+        request.user.total_remove += int(request.data.get('amount'))
+        request.user.save()
+
+        return Response(status=200)
+
 class GetUserGameCount(APIView):
     def get(self, request):
         user = request.user

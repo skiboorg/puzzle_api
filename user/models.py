@@ -39,6 +39,10 @@ class User(AbstractUser):
     balance = models.IntegerField('Баланс', default=1000)
     add_balance = models.IntegerField('Баланс снимаемый', default=0)
 
+    total_add = models.IntegerField('Баланс пополнен всего', default=0)
+    total_remove = models.IntegerField('Баланс снят всего', default=0)
+
+
     rating = models.IntegerField('Рейтинг', default=0)
     age = models.IntegerField('Возраст', blank=True, null=True)
     sex = models.CharField('Пол', max_length=50, blank=True, null=True)
