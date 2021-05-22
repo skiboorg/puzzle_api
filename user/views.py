@@ -74,7 +74,7 @@ class GetUserGameCount(APIView):
         game = Game.objects.filter(player=user).last()
         last_game = game.date
         print(today - last_game)
-        if today - last_game > dt.timedelta(minutes=1):
+        if today - last_game > dt.timedelta(days=1):
             user.games_count = 5
             user.save()
         return Response({'games':user.games_count}, status=200)
