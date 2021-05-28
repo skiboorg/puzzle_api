@@ -43,6 +43,17 @@ class StartGame(APIView):
 
 
 
+class SliderWin(APIView):
+    def post(self, request):
+        data = request.data
+        game = Game.objects.get(id=data.get('game_id'))
+        if game.player:
+            game.player.rating += 20
+            game.result = True
+            game.save()
+            game.player.save()
+        return Response(status=200)
+
 class EndGame(APIView):
     def post(self, request):
         data = request.data
