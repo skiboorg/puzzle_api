@@ -26,8 +26,8 @@ class StartGame(APIView):
                 level_id=data.get('level_id'),
                 game_type=data.get('type')
             )
-            user.games_count -= 1
-            user.save()
+            # user.games_count -= 1
+            # user.save()
 
         else:
             game = Game(
@@ -65,9 +65,13 @@ class EndGame(APIView):
             if request_type == 'remove_rating':
                 game.player.rating -= game.level.rating
             elif request_type == 'add_rating':
-                game.player.rating += game.level.rating
-                game.result = game_status
-                game.save()
+                if game.player.rating + game.level.rating >= 100:
+                    game.player.rating = 0
+                    game.player.add_balance += game.player.add_balance * 1.01
+                else:
+                    game.player.rating += game.level.rating
+                    game.result = game_status
+            game.save()
             game.player.save()
         return Response(status=200)
 
