@@ -103,7 +103,7 @@ class GameHistory(generics.ListAPIView):
     serializer_class = GameSerializer
 
     def get_queryset(self):
-        return Game.objects.filter(player=self.request.user)
+        return Game.objects.filter(player=self.request.user).order_by('-date')
 
 class GetAd(generics.RetrieveAPIView):
     serializer_class = AdSerializer
