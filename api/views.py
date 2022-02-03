@@ -1,4 +1,6 @@
 # coding utf-8
+from decimal import Decimal
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -65,9 +67,10 @@ class EndGame(APIView):
             if request_type == 'remove_rating':
                 game.player.rating -= game.level.rating
             elif request_type == 'add_rating':
-                if game.player.rating + game.level.rating >= 100:
-                    game.player.rating = 0
-                    game.player.add_balance += game.player.add_balance * 1.01
+                if game_status:
+                    game.player.rating += game.level.rating
+                    game.player.balance += Decimal(0.02)
+                    game.result = game_status
                 else:
                     game.player.rating += game.level.rating
                     game.result = game_status

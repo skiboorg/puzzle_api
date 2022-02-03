@@ -36,8 +36,7 @@ class User(AbstractUser):
     avatar = models.ImageField('Фото', upload_to='user/avatars',blank=True,null=True)
     email = models.EmailField('email', blank=True, null=True, unique=True)
     nickname = models.CharField('Ник', max_length=50, blank=False, null=True)
-    balance = models.IntegerField('Баланс', default=1000)
-    add_balance = models.IntegerField('Баланс снимаемый', default=0)
+    balance = models.DecimalField('Баланс', default=0, max_digits=10, decimal_places=3)
 
     total_add = models.IntegerField('Баланс пополнен всего', default=0)
     total_remove = models.IntegerField('Баланс снят всего', default=0)
