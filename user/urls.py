@@ -5,6 +5,7 @@ urlpatterns = [
 
 
     path('me', views.GetUser.as_view()),
+    path('user_exist', views.UserExist.as_view()),
     path('game_count', views.GetUserGameCount.as_view()),
     path('add_money', views.AddMoney.as_view()),
     path('remove_money', views.RemoveMoney.as_view()),

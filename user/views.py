@@ -67,6 +67,17 @@ class RemoveMoney(APIView):
 
         return Response(status=200)
 
+class UserExist(APIView):
+    def post(self, request):
+        try:
+            User.objects.get(wallet=request.data['wallet'])
+            status = {'result': True}
+            print('yes')
+        except:
+            print('no')
+            status = {'result': False}
+        return Response(status, status=200)
+
 class GetUserGameCount(APIView):
     def get(self, request):
         user = request.user

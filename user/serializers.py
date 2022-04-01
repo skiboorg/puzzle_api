@@ -30,11 +30,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = tuple(User.REQUIRED_FIELDS) + (
             settings.LOGIN_FIELD,
             User._meta.pk.name,
+            "wallet",
             "password",
-            'email',
-            'age',
-            'sex',
-            'nickname'
         )
 
     def validate(self, attrs):
@@ -61,7 +58,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
     def perform_create(self, validated_data):
-        print('validated_data',validated_data)
         with transaction.atomic():
             user = User.objects.create_user(**validated_data)
             if settings.SEND_ACTIVATION_EMAIL:
