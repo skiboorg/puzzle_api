@@ -30,7 +30,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = tuple(User.REQUIRED_FIELDS) + (
             settings.LOGIN_FIELD,
             User._meta.pk.name,
-            "wallet",
+            "email",
             "password",
         )
 
